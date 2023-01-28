@@ -8,7 +8,12 @@ export class Board {
   }
 
   toString() {
-    console.log('.'*this.width)
-    return "TODO";
+    let string = '';
+    for(var i = 0; i < this.height; i+=1)
+    {
+      string+='.'.repeat(this.width)
+      string+='\n'
+    }
+    return string;
   }
 }
