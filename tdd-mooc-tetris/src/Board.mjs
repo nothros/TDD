@@ -34,8 +34,8 @@ export class Board {
     if(this.block){
       throw new Error("already falling");
     }
-    this.board[this.ticker][1] = block.color;
     this.block = block;
+    this.move();
   }
 
   move(){
