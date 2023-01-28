@@ -15,7 +15,7 @@ export class Board {
   }
 
   reset() {
-    return Array(this.width).fill().map(() => Array(this.height).fill('.'));
+    return Array(this.height).fill().map(() => Array(this.width).fill('.'));
   }
 
   toString() {
@@ -35,16 +35,16 @@ export class Board {
       throw new Error("already falling");
     }
     this.block = block;
-    this.move();
+    this.move(0,1, this.block.color);
   }
 
-  move(){
-    this.board[this.ticker][1] = this.block.color;
+  move(row,col, cell){
+    this.board[row][col] = cell;
   }
 
   tick(){
+    this.move(this.ticker, 1, '.')
     this.ticker = this.ticker += 1;
-    this.board=this.reset();
-    this.move();
+    this.move(this.ticker, 1, this.block.color);
   }
 }
