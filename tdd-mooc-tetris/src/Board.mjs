@@ -1,19 +1,23 @@
 export class Board {
   width;
   height;
+  board;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
+    this.board = new Array(this.height).fill(new Array(this.width).fill('.'))
   }
 
   toString() {
     let string = '';
-    for(var i = 0; i < this.height; i+=1)
-    {
-      string+='.'.repeat(this.width)
-      string+='\n'
-    }
+    this.board.forEach(row => {
+      row.forEach(cell => {
+        string+=cell;
+      }
+      ),string+='\n'
+    });
+
     return string;
   }
 }
