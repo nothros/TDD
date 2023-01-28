@@ -47,4 +47,8 @@ export class Board {
     this.ticker = this.ticker += 1;
     this.move(this.ticker, 1, this.block.color);
   }
+
+  hasFalling(){
+    return this.ticker !== this.height;
+  }
 }
