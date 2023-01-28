@@ -11,7 +11,7 @@ export class Board {
     this.height = height;
     this.board = this.reset();
     this.ticker = 0;
-    this.block = '';
+    this.block = undefined;
   }
 
   reset() {
@@ -31,6 +31,9 @@ export class Board {
   }
   
   drop(block){
+    if(this.block){
+      throw new Error("already falling");
+    }
     this.board[this.ticker][1] = block.color;
     this.block = block;
   }
