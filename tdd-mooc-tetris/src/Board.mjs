@@ -42,13 +42,17 @@ export class Board {
     this.board[row][col] = cell;
   }
 
-  tick(){
-    this.move(this.ticker, 1, '.')
-    this.ticker = this.ticker += 1;
-    this.move(this.ticker, 1, this.block.color);
-  }
-
   hasFalling(){
     return this.ticker !== this.height;
   }
+
+  tick(){
+    this.ticker = this.ticker += 1;
+    if(this.hasFalling()){
+    this.move(this.ticker-1, 1, '.')
+    this.move(this.ticker, 1, this.block.color);
+    }
+  }
+
+
 }
