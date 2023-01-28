@@ -3,11 +3,13 @@ export class Board {
   width;
   height;
   board;
+  ticker;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.board = this.reset();
+    this.ticker = 0;
   }
 
   reset() {
@@ -27,7 +29,12 @@ export class Board {
   }
   
   drop(block){
-    this.board[0][1] = block.color;
+    this.board[this.ticker][1] = block.color;
   }
+
+  move(){
+    this.board[this.ticker][1] = this.block;
+  }
+
 
 }
