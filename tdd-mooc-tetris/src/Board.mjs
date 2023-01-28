@@ -21,4 +21,9 @@ export class Board {
 
     return string;
   }
+  
+  drop(block){
+    this.board[0][1] = block.color;
+    
+  }
 }
