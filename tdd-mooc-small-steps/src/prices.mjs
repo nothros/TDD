@@ -33,10 +33,8 @@ function createApp(database) {
 
   function parseHolidays(holidays)
   {
-    return holidays.map(d => parseDate(d.holiday));
+    return holidays.map(date => parseDate(date.holiday));
   }
-
-
 
   function calculateCost(age, type, date, baseCost, holidays) {
     if (type === "night") {
