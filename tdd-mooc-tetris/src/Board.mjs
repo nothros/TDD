@@ -4,12 +4,14 @@ export class Board {
   height;
   board;
   ticker;
+  block;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
     this.board = this.reset();
     this.ticker = 0;
+    this.block = '';
   }
 
   reset() {
@@ -30,11 +32,16 @@ export class Board {
   
   drop(block){
     this.board[this.ticker][1] = block.color;
+    this.block = block;
   }
 
   move(){
-    this.board[this.ticker][1] = this.block;
+    this.board[this.ticker][1] = this.block.color;
   }
 
-
+  tick(){
+    this.ticker = this.ticker += 1;
+    this.board=this.reset();
+    this.move();
+  }
 }
