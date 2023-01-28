@@ -21,6 +21,7 @@ function createApp(database) {
     const baseCost = database.findBasePriceByType(type).cost;
     const date = parseDate(req.query.date);
     const cost = calculateCost(age, type, date, baseCost);
+   // const holidays2 = parseHolidays(database.getHolidays();
     res.json({ cost });
   });
 
@@ -32,7 +33,7 @@ function createApp(database) {
 
   function parseHolidays(holidays)
   {
-    return holidays.map(parseDate);
+    return holidays.map(d => parseDate(d.holiday));
   }
 
 
@@ -88,6 +89,8 @@ function createApp(database) {
   }
 
   function isHoliday(date) {
+    
+    const hol = parseHolidays(database.getHolidays());
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = parseDate(row.holiday); //Change row to use parseDate instead of new date
