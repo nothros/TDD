@@ -92,6 +92,7 @@ function createApp(database) {
     
     const hol = parseHolidays(database.getHolidays());
     const holidays = database.getHolidays();
+    return hol.some(holiday => holiday.equals(date));
     for (let row of hol) {
       //let holiday = parseDate(row.holiday); //Change row to use parseDate instead of new date
       if ( date.equals(row) ) {
