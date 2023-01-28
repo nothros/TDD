@@ -92,9 +92,9 @@ function createApp(database) {
     
     const hol = parseHolidays(database.getHolidays());
     const holidays = database.getHolidays();
-    for (let row of holidays) {
-      let holiday = parseDate(row.holiday); //Change row to use parseDate instead of new date
-      if ( date.equals(holiday) ) {
+    for (let row of hol) {
+      //let holiday = parseDate(row.holiday); //Change row to use parseDate instead of new date
+      if ( date.equals(row) ) {
         return true;
       }
     }
