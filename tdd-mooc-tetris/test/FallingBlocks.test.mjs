@@ -45,7 +45,7 @@ describe("Falling blocks", () => {
       expect(() => board.drop(new Block("Y"))).to.throw("already falling");
       const after = board.toString();
       expect(after).to.equal(before);
-    });
+    }); 
   });
   */
 

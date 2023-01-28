@@ -1,3 +1,4 @@
+
 export class Board {
   width;
   height;
@@ -6,7 +7,7 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.board = new Array(this.height).fill(new Array(this.width).fill('.'))
+    this.board = Array(width).fill().map(() => Array(height).fill('.'));
   }
 
   toString() {
@@ -15,7 +16,7 @@ export class Board {
       row.forEach(cell => {
         string+=cell;
       }
-      ),string+='\n'
+      ),string+="\n";
     });
 
     return string;
