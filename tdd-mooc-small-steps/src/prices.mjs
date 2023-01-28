@@ -20,7 +20,6 @@ function createApp(database) {
     const type = req.query.type;
     const baseCost = database.findBasePriceByType(type).cost;
     const date = parseDate(req.query.date);
-    const date2 = Temporal.PlainDate.from(req.query.date); //Add date2 withot checker
     const cost = calculateCost(age, type, date, baseCost);
     res.json({ cost });
   });
@@ -28,6 +27,12 @@ function createApp(database) {
   function parseDate(dateString) {
     if (dateString) {
       return new Date(dateString);
+    }
+  }
+
+  function parseDate2(dateString) { 
+    if (dateString) {
+      return Temporal.PlainDate.from(dateString)  //Add parseDate2 because need of checking
     }
   }
 
