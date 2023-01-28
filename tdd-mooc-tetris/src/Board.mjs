@@ -7,7 +7,11 @@ export class Board {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.board = Array(width).fill().map(() => Array(height).fill('.'));
+    this.board = this.reset();
+  }
+
+  reset() {
+    return Array(this.width).fill().map(() => Array(this.height).fill('.'));
   }
 
   toString() {
@@ -24,6 +28,6 @@ export class Board {
   
   drop(block){
     this.board[0][1] = block.color;
-    
   }
+
 }
