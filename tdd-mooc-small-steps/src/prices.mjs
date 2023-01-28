@@ -20,8 +20,8 @@ function createApp(database) {
     const type = req.query.type;
     const baseCost = database.findBasePriceByType(type).cost;
     const date = parseDate(req.query.date);
-    const cost = calculateCost(age, type, date, baseCost);
-   // const holidays2 = parseHolidays(database.getHolidays();
+    const holidays = parseHolidays(database.getHolidays());
+    const cost = calculateCost(age, type, date, baseCost, holidays);
     res.json({ cost });
   });
 
@@ -38,11 +38,11 @@ function createApp(database) {
 
 
 
-  function calculateCost(age, type, date, baseCost) {
+  function calculateCost(age, type, date, baseCost, holidays) {
     if (type === "night") {
       return calculateCostForNightTicket(age, baseCost);
     } else {
-      return calculateCostForDayTicket(age, date, baseCost);
+      return calculateCostForDayTicket(age, date, baseCost, holidays);
     }
   }
 
@@ -59,8 +59,8 @@ function createApp(database) {
     return baseCost;
   }
 
-  function calculateCostForDayTicket(age, date, baseCost) {
-    let reduction = calculateReduction(date);
+  function calculateCostForDayTicket(age, date, baseCost, holidays) {
+    let reduction = calculateReduction(date, holidays);
     if (age === undefined) {
       return Math.ceil(baseCost * (1 - reduction / 100));
     }
@@ -76,9 +76,9 @@ function createApp(database) {
     return Math.ceil(baseCost * (1 - reduction / 100));
   }
 
-  function calculateReduction(date) {
+  function calculateReduction(date, holidays) {
     let reduction = 0;
-    if (date && isMonday(date) && !isHoliday(date)) {
+    if (date && isMonday(date) && !isHoliday(date, holidays)) {
       reduction = 35;
     }
     return reduction;
@@ -88,18 +88,8 @@ function createApp(database) {
     return date.dayOfWeek === 1;
   }
 
-  function isHoliday(date) {
-    
-    const hol = parseHolidays(database.getHolidays());
-    const holidays = database.getHolidays();
-    return hol.some(holiday => holiday.equals(date));
-    for (let row of hol) {
-      //let holiday = parseDate(row.holiday); //Change row to use parseDate instead of new date
-      if ( date.equals(row) ) {
-        return true;
-      }
-    }
-    return false;
+  function isHoliday(date, holidays) {
+    return holidays.some(holiday => holiday.equals(date));
   }
 
   return app;
