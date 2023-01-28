@@ -30,11 +30,7 @@ function createApp(database) {
     }
   }
 
-  function parseDate2(dateString) { 
-    if (dateString) {
-      return Temporal.PlainDate.from(dateString)  //Add parseDate2 because need of checking
-    }
-  }
+
 
   function calculateCost(age, type, date, baseCost) {
     if (type === "night") {
@@ -89,7 +85,7 @@ function createApp(database) {
   function isHoliday(date) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
-      let holiday = parseDate2(row.holiday); //Change row to use parseDate instead of new date
+      let holiday = parseDate(row.holiday); //Change row to use parseDate instead of new date
       if ( date.equals(holiday) ) {
         return true;
       }
