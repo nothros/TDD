@@ -30,6 +30,11 @@ function createApp(database) {
     }
   }
 
+  function parseHolidays(holidays)
+  {
+    return holidays.map(parseDate);
+  }
+
 
 
   function calculateCost(age, type, date, baseCost) {
