@@ -21,26 +21,15 @@ export class Board {
     return Array(this.height).fill().map(() => Array(this.width).fill('.'));
   }
 
-  toString() {
-    this.toString2();
-    let string = '';
-    this.board.forEach(row => {
-      row.forEach(cell => {
-        string+=cell;
-      }
-      ),string+="\n";
-    });
+  
 
-    return this.toString2();
-  }
-
-  toString2(){
+  toString(){
     let s = '';
     for(let row = 0; row < this.height; row++)
     {
       for(let col = 0; col < this.width; col++)
       {
-        s+=this.hasFallingAt(row, col)? this.fallingBlock.color : '.';
+        s+=this.hasFallingAt(row, col)? this.fallingBlock.color : this.board[row][col];
       }
       s+='\n'
     }
@@ -56,7 +45,7 @@ export class Board {
   drop(block){
     if(this.hasFalling())
     {
-      throw Error("already falling");
+      throw new Error("already falling");
     }
     this.fallingBlock = block;
   }
@@ -67,7 +56,14 @@ export class Board {
   }
 
   tick(){
-    this.fallingRow ++;
+    if(this.fallingRow == this.height-1)
+    {
+      this.board[this.fallingRow][1] = this.fallingBlock.color
+      this.fallingBlock = null;
+    }else {
+      this.fallingRow ++;
+
+    }
   }
 
 
