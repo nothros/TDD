@@ -2,8 +2,8 @@
 export class RotatingShape{
     
     rows;
-    cols;
     matrix;
+    
     constructor(shape){
         this.matrix = [];
         this.rows = shape.replaceAll(" ", "").trim().split("\n")
@@ -13,45 +13,31 @@ export class RotatingShape{
         }
     }
 
-    Piece(piece) {
-        this.matrix = piece;
-    }
 
     toString(){
+        return this.print(this.matrix)
+    }
+
+    print(mat){
         var s='';
-        for(var row = 0; row < this.matrix.length; row++){
-            for(var col = 0; col < this.matrix[0].length; col++){
-                s+=this.matrix[row][col]
+        for(var row = 0; row < mat.length; row++){
+            for(var col = 0; col < mat[0].length; col++){
+                s+=mat[row][col]
             }
             s+="\n"
         }
         return s;
     }
 
+    
     rotateRight(){
-        var s = ""
-        for(var row = 0; row < this.matrix.length; row++)
-        {
-            for(var col = this.matrix.length-1; col >=0; col--)
-            {
-                s+=this.matrix[col][row];
-            }
-            s+="\n";
-        }
-        return new RotatingShape(s);
+        var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[i]).reverse())
+        return new RotatingShape(this.print(e));
     }
 
 
     rotateLeft(){
-        var s = ""
-        for(var col = this.matrix.length-1; col >= 0; col--)
-        {
-            for(var row = 0; row < this.matrix.length; row++)
-            {
-                s+=this.matrix[row][col];
-            }
-            s+="\n";
-        }
-        return new RotatingShape(s);
+        var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
+        return new RotatingShape(this.print(e));
     }
 }
