@@ -5,6 +5,8 @@ export class Board {
   board;
   ticker;
   block;
+  fallingBlock;
+  fallingRow;
 
   constructor(width, height) {
     this.width = width;
@@ -12,6 +14,7 @@ export class Board {
     this.board = this.reset();
     this.ticker = 0;
     this.block = undefined;
+    this.fallingRow = 0;
   }
 
   reset() {
@@ -37,36 +40,34 @@ export class Board {
     {
       for(let col = 0; col < this.width; col++)
       {
-        s+='.';
+        s+=this.hasFallingAt(row, col)? this.fallingBlock.color : '.';
       }
       s+='\n'
     }
     console.log(s);
     return s;
   }
+
+  hasFallingAt(row, col)
+  {
+    return this.hasFalling() && row == this.fallingRow && col == 1;
+  }
   
   drop(block){
-    if(this.block){
-      throw new Error("already falling");
+    if(this.hasFalling())
+    {
+      throw Error("already falling");
     }
-    this.block = block;
-    this.move(0,1, this.block.color);
+    this.fallingBlock = block;
   }
 
-  move(row,col, cell){
-    this.board[row][col] = cell;
-  }
 
   hasFalling(){
-    return this.ticker !== this.height;
+    return this.fallingBlock != null;
   }
 
   tick(){
-    this.ticker = this.ticker += 1;
-    if(this.hasFalling()){
-    this.move(this.ticker-1, 1, '.')
-    this.move(this.ticker, 1, this.block.color);
-    }
+    this.fallingRow ++;
   }
 
 
