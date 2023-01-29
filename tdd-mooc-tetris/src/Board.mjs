@@ -19,6 +19,7 @@ export class Board {
   }
 
   toString() {
+    this.toString2();
     let string = '';
     this.board.forEach(row => {
       row.forEach(cell => {
@@ -27,7 +28,21 @@ export class Board {
       ),string+="\n";
     });
 
-    return string;
+    return this.toString2();
+  }
+
+  toString2(){
+    let s = '';
+    for(let row = 0; row < this.height; row++)
+    {
+      for(let col = 0; col < this.width; col++)
+      {
+        s+='.';
+      }
+      s+='\n'
+    }
+    console.log(s);
+    return s;
   }
   
   drop(block){
