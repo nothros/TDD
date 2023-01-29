@@ -3,7 +3,7 @@ export class RotatingShape{
     
     rows;
     matrix;
-    
+
     constructor(shape){
         this.matrix = [];
         this.rows = shape.replaceAll(" ", "").trim().split("\n")
@@ -11,6 +11,7 @@ export class RotatingShape{
         for(var i = 0; i < this.rows.length; i++){
             this.matrix.push([...this.rows[i]]);
         }
+        Object.freeze(this);
     }
 
 
