@@ -48,6 +48,7 @@ export class Board {
       throw new Error("already falling");
     }
     this.fallingBlock = block;
+    this.fallingRow = 0;
   }
 
 
@@ -56,7 +57,7 @@ export class Board {
   }
 
   tick(){
-    if(this.fallingRow == this.height-1)
+    if(this.fallingRow == this.height-1 || this.board[this.fallingRow+1][1] != '.')
     {
       this.board[this.fallingRow][1] = this.fallingBlock.color
       this.fallingBlock = null;
