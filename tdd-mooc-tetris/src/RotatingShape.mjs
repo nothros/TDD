@@ -5,8 +5,10 @@ export class RotatingShape{
     matrix;
     positions;
     currentPosition;
+    amountOfPosition; 
 
     constructor(shape, amountOfPosition = 4, currentPosition = 0){
+        this.amountOfPosition = amountOfPosition;
         this.positions = [];
         this.currentPosition = currentPosition;
                 
@@ -57,19 +59,14 @@ export class RotatingShape{
         let position = this.currentPosition == this.amountOfPosition -1 ? 0 : this.currentPosition+1;
         return new RotatingShape(this.print(this.positions[position], this.amountOfPosition, position));
     }
-    
 
-
-    rotateLeft(){
         
-            var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
-           
-
-            return new RotatingShape(this.print(e));
-        
-           
-        
+    rotateLeft(){       
+        let position = this.currentPosition == 0 ? this.amountOfPosition -1 : this.currentPosition-1;
+        return new RotatingShape(this.print(this.positions[position], this.amountOfPosition, position));
     }
+
+
 
     checkBlock(mat){
         if(!mat[0].includes('T') && mat[0].includes('.'))
