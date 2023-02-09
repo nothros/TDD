@@ -4,7 +4,10 @@ export class RotatingShape{
     rows;
     matrix;
 
-    constructor(shape){
+    constructor(shape, amountOfPosition = 4){
+        
+        console.log(amountOfPosition)
+    
         this.matrix = [];
         this.rows = shape.replaceAll(" ", "").trim().split("\n")
         
@@ -13,6 +16,8 @@ export class RotatingShape{
         }
         Object.freeze(this);
     }
+
+
 
 
     toString(){
@@ -33,12 +38,30 @@ export class RotatingShape{
     
     rotateRight(){
         var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[i]).reverse())
+       
         return new RotatingShape(this.print(e));
     }
 
 
     rotateLeft(){
-        var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
-        return new RotatingShape(this.print(e));
+            var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
+           
+
+            return new RotatingShape(this.print(e));
+        
+           
+        
     }
+
+    checkBlock(mat){
+        if(!mat[0].includes('T') && mat[0].includes('.'))
+        {
+            return 'I';
+        }
+        else{
+            return 'T';
+        }
+    }
+
+      
 }
