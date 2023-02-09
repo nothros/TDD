@@ -4,7 +4,8 @@ export class RotatingShape{
     rows;
     matrix;
     positions;
-    currentPosition
+    currentPosition;
+
     constructor(shape, amountOfPosition = 4, currentPosition = 0){
         this.positions = [];
         this.currentPosition = currentPosition;
@@ -24,9 +25,6 @@ export class RotatingShape{
             this.positions[j]=e
         }
 
-        for(let j = 0; j < this.positions.length; j++){
-            console.log(this.print(this.positions[j]))
-        }
         Object.freeze(this);
     }
 
@@ -49,10 +47,15 @@ export class RotatingShape{
     }
 
     
-    rotateRight(){
+    /*rotateRight(){
         var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[i]).reverse())
        
         return new RotatingShape(this.print(e));
+    }*/
+
+    rotateRight(){       
+        let position = this.currentPosition + 1;
+        return new RotatingShape(this.print(this.positions[position]));
     }
 
 
