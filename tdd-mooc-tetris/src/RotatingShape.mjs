@@ -54,12 +54,14 @@ export class RotatingShape{
     }*/
 
     rotateRight(){       
-        let position = this.currentPosition + 1;
-        return new RotatingShape(this.print(this.positions[position]));
+        let position = this.currentPosition == this.amountOfPosition -1 ? 0 : this.currentPosition+1;
+        return new RotatingShape(this.print(this.positions[position], this.amountOfPosition, position));
     }
+    
 
 
     rotateLeft(){
+        
             var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
            
 
