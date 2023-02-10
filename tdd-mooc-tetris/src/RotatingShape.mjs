@@ -3,7 +3,6 @@ export class RotatingShape{
     
     rows;
     matrix;
-    positions;
     currentPosition;
     amountOfPosition; 
     positions;
@@ -11,7 +10,6 @@ export class RotatingShape{
     constructor(shape, amountOfPosition=4, currentPosition = 0, positions){
         this.currentPosition = currentPosition;
         this.amountOfPosition = amountOfPosition;
-        console.log("AMOUNT POSITION", this.amountOfPosition)
 
         this.matrix = [];
         this.rows = shape.replaceAll(" ", "").trim().split("\n")
@@ -20,17 +18,16 @@ export class RotatingShape{
             this.matrix.push([...this.rows[i]]);
         }
         if(positions === undefined){
-        this.positions = []
-        this.positions.push(this.matrix);
-        for(var i = 1; i < 4; i++){
-            var d = this.positions[i-1]
-            this.positions.push(this.makePositions(d))
+            this.positions = []
+            this.positions.push(this.matrix);
+            for(var i = 1; i < 4; i++){
+                var d = this.positions[i-1]
+                this.positions.push(this.makePositions(d))
+            }
+        }else{
+            this.positions=positions;
         }
-    }
-    else{
-        this.positions=positions;
-    }
-        console.log(this.positions, "POSITIONIT", this.positions.length)
+        
         Object.freeze(this);
     }
 
@@ -38,6 +35,7 @@ export class RotatingShape{
     toString(){
         return this.print(this.matrix)
     }
+    
     print(mat){
         var s='';
         for(var row = 0; row < mat.length; row++){
@@ -50,27 +48,28 @@ export class RotatingShape{
     }
 
     makePositions(mat){
-        var e = mat[0].map((val, i) => mat.map(row => row[i]).reverse())
-        return e;
+        var pos = mat[0].map((val, i) => mat.map(row => row[i]).reverse())
+        return pos;
     }
     
     rotateRight(){
-        var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[i]).reverse())
-        var c = this.currentPosition+1;
-        if(c > this.amountOfPosition-1)
+        //var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[i]).reverse())
+        var currPos = this.currentPosition+1;
+        if(currPos > this.amountOfPosition-1)
         {
-            c = 0;
+            currPos = 0;
         }
-        return new RotatingShape(this.print(this.positions[c]), this.amountOfPosition, c, this.positions);
+        return new RotatingShape(this.print(this.positions[currPos]), this.amountOfPosition, currPos, this.positions);
     }
     rotateLeft(){
-        var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
-        var c = this.currentPosition-1;
+        //var e = this.matrix[0].map((val, i) => this.matrix.map(row => row[row.length-1-i]));
+        var currPos = this.currentPosition-1;
       
-        if(c < 0)
+        if(currPos < 0)
         {
-            c = this.amountOfPosition-1;
+            currPos = this.amountOfPosition-1;
         }
-        return new RotatingShape(this.print(this.positions[c]),this.amountOfPosition, c, this.positions);
+        
+        return new RotatingShape(this.print(this.positions[currPos]),this.amountOfPosition, currPos, this.positions);
     }
 }
