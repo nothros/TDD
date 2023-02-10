@@ -29,7 +29,7 @@ export class Board {
     {
       for(let col = 0; col < this.width; col++)
       {
-        s+=this.hasFallingAt(row, col)? this.fallingBlock.color : this.board[row][col];
+        s+=this.hasFallingAt(row, col)? this.fallingBlock : this.board[row][col];
       }
       s+='\n'
     }
@@ -46,7 +46,14 @@ export class Board {
     {
       throw new Error("already falling");
     }
-    this.fallingBlock = block;
+    if(block.color){
+      this.fallingBlock = block.color
+      console.log(this.fallingBlock, "FALLINF")
+    }else{
+      this.fallingBlock = block.toString();
+      console.log(this.fallingBlock, "FALLING TETRO")
+
+    }
     this.fallingRow = 0;
   }
 
@@ -58,7 +65,7 @@ export class Board {
   tick(){
     if(this.fallingRow == this.height-1 || this.board[this.fallingRow+1][1] != '.')
     {
-      this.board[this.fallingRow][1] = this.fallingBlock.color
+      this.board[this.fallingRow][1] = this.fallingBlock
       this.fallingBlock = null;
     }else {
       this.fallingRow ++;
