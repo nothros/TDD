@@ -15,8 +15,11 @@ export class Tetromino{
         ".....\n", 2
     )
 
-
-
+    static O_SHAPE = new RotatingShape(
+        ".OO\n" +
+        ".OO\n" +
+        "...\n", 1
+    )
 
 
 }
