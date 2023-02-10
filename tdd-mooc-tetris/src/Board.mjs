@@ -6,6 +6,7 @@ export class Board {
   block;
   fallingBlock;
   fallingRow;
+  fallingCol;
 
   constructor(width, height) {
     this.width = width;
@@ -13,6 +14,7 @@ export class Board {
     this.board = this.reset();
     this.block = undefined;
     this.fallingRow = 0;
+
   }
 
   reset() {
@@ -34,6 +36,13 @@ export class Board {
     return s;
   }
 
+
+  draw(block){
+    var mat = block.getMatrix()
+    console.log("DRAW", mat)
+
+  }
+
   hasFallingAt(row, col)
   {
     return this.hasFalling() && row == this.fallingRow && col == 1;
@@ -41,15 +50,17 @@ export class Board {
   
   drop(block){
     
+    //this.draw(block);
     if(this.hasFalling())
     {
       throw new Error("already falling");
     }
-  
-      
       this.fallingBlock = block.toString().trim();
+      console.log(this.fallingBlock, "FALLiNG BLOCK")
 
     this.fallingRow = 0;
+
+
   }
 
 
@@ -58,6 +69,7 @@ export class Board {
   }
 
   tick(){
+
     if(this.fallingRow == this.height-1 || this.board[this.fallingRow+1][1] != '.')
     {
       this.board[this.fallingRow][1] = this.fallingBlock

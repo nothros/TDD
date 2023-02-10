@@ -72,4 +72,8 @@ export class RotatingShape{
         
         return new RotatingShape(this.print(this.positions[currPos]),this.amountOfPosition, currPos, this.positions);
     }
+
+    getMatrix(){
+        return this.matrix;
+    }
 }
