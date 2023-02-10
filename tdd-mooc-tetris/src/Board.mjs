@@ -3,7 +3,6 @@ export class Board {
   width;
   height;
   board;
-  ticker;
   block;
   fallingBlock;
   fallingRow;
@@ -12,7 +11,6 @@ export class Board {
     this.width = width;
     this.height = height;
     this.board = this.reset();
-    this.ticker = 0;
     this.block = undefined;
     this.fallingRow = 0;
   }
@@ -42,18 +40,15 @@ export class Board {
   }
   
   drop(block){
+    
     if(this.hasFalling())
     {
       throw new Error("already falling");
     }
-    if(block.color){
-      this.fallingBlock = block.color
-      console.log(this.fallingBlock, "FALLINF")
-    }else{
-      this.fallingBlock = block.toString();
-      console.log(this.fallingBlock, "FALLING TETRO")
+  
+      
+      this.fallingBlock = block.toString().trim();
 
-    }
     this.fallingRow = 0;
   }
 

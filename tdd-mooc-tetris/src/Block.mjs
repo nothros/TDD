@@ -1,7 +1,5 @@
-export class Block {
-  color;
+import { RotatingShape } from "./RotatingShape.mjs";
 
-  constructor(color) {
-    this.color = color;
-  }
+export class Block extends RotatingShape{
+ 
 }
