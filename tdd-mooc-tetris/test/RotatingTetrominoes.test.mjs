@@ -12,9 +12,7 @@ function distinctOrientations(shape) {
     distinct.add(goingLeft.toString());
     goingLeft = goingLeft.rotateLeft();
   }
-  distinct.forEach(element => {
-    console.log(element.toString())
-  });
+
   return distinct;
 }
 

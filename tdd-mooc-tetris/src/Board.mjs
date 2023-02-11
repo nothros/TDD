@@ -38,10 +38,24 @@ export class Board {
 
 
   draw(block){
-    var mat = block.getMatrix()
-    console.log("DRAW", mat)
+    var mat = [...block.getMatrix()]
+    var center = Math.ceil(this.width/2)-Math.floor(mat[0].length/2)-1;
+   
+    var testing = [...this.reset()]
 
+    for(let row = 0; row < this.height; row++)
+    {
+      for(let col = 0; col < this.width; col++)
+      {
+        if(col == center && row < mat[0].length){
+          testing[row].splice(center, mat[row].length, ...mat[row])
+        }
+      }
+    }
+    console.log("TESTIBOARS", testing)
   }
+
+ 
 
   hasFallingAt(row, col)
   {
@@ -50,16 +64,14 @@ export class Board {
   
   drop(block){
     
-    //this.draw(block);
     if(this.hasFalling())
     {
       throw new Error("already falling");
     }
       this.fallingBlock = block.toString().trim();
-      console.log(this.fallingBlock, "FALLiNG BLOCK")
 
     this.fallingRow = 0;
-
+    this.draw(block)
 
   }
 
